@@ -1,17 +1,17 @@
-# ?? InsureGig
+ï»¿# InsureGig
 
 **AI-Powered Parametric Income Protection for Food Delivery Workers**  
-Guidewire DEVTrails 2026 — Phase 2 Submission
+Guidewire DEVTrails 2026 - Phase 2 Submission
 
 ---
 
-# ?? Phase 2: Automation & Protection
+# Phase 2: Automation and Protection
 
 **Theme: Protect Your Worker**
 
-InsureGig is a fully automated parametric micro-insurance prototype that protects gig delivery workers from **income loss due to real-world disruptions** such as rain, heat, pollution, and operational failures.
+InsureGig is a fully automated parametric micro-insurance prototype designed to protect gig delivery workers from income loss caused by real-world disruptions such as rain, heat, pollution, and operational failures.
 
-This Phase-2 implementation demonstrates a **working end-to-end system** with:
+This Phase 2 implementation demonstrates a working end-to-end system with:
 
 * Automated disruption detection
 * AI-driven dynamic pricing
@@ -20,7 +20,7 @@ This Phase-2 implementation demonstrates a **working end-to-end system** with:
 
 ---
 
-# ?? Problem Understanding
+# Problem Understanding
 
 India's food delivery ecosystem relies on millions of gig delivery partners operating through platforms such as Swiggy and Zomato. Their earnings are directly linked to completed deliveries and active outdoor working hours, making income highly vulnerable to sudden external disruptions.
 
@@ -43,9 +43,9 @@ These short-term disruptions often result in immediate loss of earning opportuni
 
 ---
 
-# ?? Solution Overview
+# Solution Overview
 
-InsureGig combines **parametric insurance + AI + automation** to:
+InsureGig combines parametric insurance, AI, and automation to:
 
 * Detect disruptions automatically
 * Estimate income loss
@@ -56,104 +56,94 @@ This platform is designed as an automated income protection layer for gig delive
 
 ---
 
-# ?? End-to-End System Flow
+# End-to-End System Flow
 
 ```text
-User registers ? activates policy ? starts shift
-        ?
+User registers -> activates policy -> starts shift
+        |
 System monitors environment continuously (mock API)
-        ?
+        |
 Disruption detected automatically
-        ?
+        |
 Claim generated (zero-touch)
-        ?
+        |
 Payout calculated and credited
 ```
 
 ---
 
-# ?? 1. Registration Process
+# 1. Registration Process
 
 A structured onboarding flow captures:
 
 * Phone-based authentication (OTP)
 * Worker profile (name, city, platform)
-* Work details (daily income, full/part-time)
-* Identity verification (Aadhaar + PAN)
+* Work details (daily income, full-time or part-time)
+* Identity verification (Aadhaar and PAN)
 * UPI ID for payouts
-* Location permission (shift-based tracking)
+* Location permission for shift-based validation
 
-?? Output: Complete worker profile for risk and payout modeling
+Output: Complete worker profile for risk and payout modeling.
 
 ---
 
-# ?? 2. Insurance Policy Management
+# 2. Insurance Policy Management
 
 * Weekly coverage model (7-day cycle)
-* User can activate policy anytime
-* Coverage valid only during active work sessions
+* User can activate policy at any time
+* Coverage remains valid only during active work sessions
 
 ---
 
-# ?? 3. Dynamic Premium Calculation (AI Integration)
+# 3. Dynamic Premium Calculation (AI Integration)
 
-Premium is calculated using a **risk-aware actuarial model**.
+Premium is calculated using a risk-aware actuarial model.
 
-## ?? ML Integration
+## ML Integration
 
-* Logistic Regression predicts disruption probability (`risk_score`)
+* Logistic Regression predicts disruption probability as `risk_score`
 
----
-
-## ?? Premium Formula
+## Premium Formula
 
 ```text
-Premium = (Expected Loss × (1 + Margin)) + Transaction Cost
+Premium = (Expected Loss * (1 + Margin)) + Transaction Cost
 ```
 
----
-
-## ?? Expected Loss
+## Expected Loss
 
 ```text
 Expected Loss =
-effective_risk × effective_hours × hourly_income
+effective_risk * effective_hours * hourly_income
 ```
 
----
-
-## ?? Key Factors
+## Key Factors
 
 * ML risk score
 * City risk profile (hyper-local)
 * Season factor
 * Worker income and exposure
 
----
+## Dynamic Pricing Behavior
 
-## ?? Dynamic Pricing Behavior
+* Safer zones lead to lower premiums
+* High-risk zones lead to higher premiums
+* Seasonal risk adjustments are applied
 
-* Safer zones ? lower premium
-* High-risk zones ? higher premium
-* Seasonal risk adjustments applied
-
-?? Demonstrates **AI-driven dynamic pricing based on hyper-local risk**
+This demonstrates AI-driven dynamic pricing based on hyper-local risk.
 
 ---
 
-# ?? 4. Automated Disruption Detection (CORE REQUIREMENT)
+# 4. Automated Disruption Detection
 
-InsureGig implements **3–5 automated triggers** using a structured mock API.
+InsureGig implements 3 to 5 automated triggers using a structured mock API.
 
----
-
-## ?? Mock Environment API
+## Mock Environment API
 
 ```http
 GET /api/environment/:city
 ```
 
-### Sample Response:
+### Sample Response
 
 ```json
 {
@@ -166,55 +156,47 @@ GET /api/environment/:city
 }
 ```
 
----
+## Automated Trigger Engine
 
-## ? Automated Trigger Engine
-
-Runs every 10–15 seconds:
+Runs every 10 to 15 seconds:
 
 * Fetches environment data
 * Evaluates conditions
 * Detects disruptions
 
----
+## Implemented Triggers
 
-## ?? Implemented Triggers
+| Trigger | Condition |
+| --- | --- |
+| Heavy Rain | `rainfall > 0.7` |
+| Extreme Heat | `temperature > 0.85` |
+| High AQI | `aqi > 0.8` |
+| Flood (Derived) | `rainfall > 0.8` and high city risk |
+| Platform Outage | simulated event |
 
-| Trigger            | Condition            |
-| ------------------ | -------------------- |
-| ??? Heavy Rain     | rainfall > 0.7       |
-| ??? Extreme Heat   | temperature > 0.85   |
-| ??? High AQI       | aqi > 0.8            |
-| ?? Flood (Derived) | rainfall + city risk |
-| ?? Platform Outage | simulated event      |
-
-?? Fully automated — **no user interaction required**
+Fully automated with no user interaction required.
 
 ---
 
-# ? 5. Claims Management (Zero-Touch)
+# 5. Claims Management (Zero-Touch)
 
-## ?? Key Principle:
+## Key Principle
 
 ```text
 User does NOT file claims
 ```
 
----
-
-## ?? Claim Flow
+## Claim Flow
 
 ```text
 Trigger detected
-? Validate active shift + policy
-? Generate claim automatically
-? Calculate payout
-? Store and display result
+-> Validate active shift and policy
+-> Generate claim automatically
+-> Calculate payout
+-> Store and display result
 ```
 
----
-
-## ??? Validation
+## Validation
 
 * Active shift required
 * Active policy required
@@ -222,78 +204,72 @@ Trigger detected
 
 ---
 
-# ?? 6. Automated Payout Calculation
+# 6. Automated Payout Calculation
 
-## Formula:
+## Formula
 
 ```text
-Payout = Hourly Income × Lost Hours × Confidence
+Payout = Hourly Income * Lost Hours * Confidence
 ```
 
----
+## Logic
 
-## Logic:
+* Lost hours are derived from disruption severity
+* Payout is adjusted using ML risk score
+* Confidence score is used for final payout determination
 
-* Lost hours derived from disruption severity
-* Adjusted using ML risk score
-* Validated using confidence score
+## Constraints
 
----
-
-## Constraints:
-
-* Payout = daily income
+* Payout must be less than or equal to daily income
 * No payout without valid activity
 
 ---
 
-# ?? 7. Seamless Zero-Touch User Experience
+# 7. Seamless Zero-Touch User Experience
 
-Users do NOT:
+Users do not:
 
 * File claims
 * Submit proofs
 * Click trigger buttons
 
----
+## What the User Sees
 
-## ?? What User Sees
+* "Monitoring environment..."
+* "Heavy Rain Detected"
+* "Claim processed automatically"
+* "Rs 420 credited"
 
-* ?? “Monitoring environment…”
-* ?? “Heavy Rain Detected”
-* ? “Claim processed automatically”
-* ?? “?420 credited”
-
-?? Fully automated, frictionless experience
+This creates a fully automated and frictionless experience.
 
 ---
 
-# ?? Coverage Exclusions
+# Coverage Exclusions
 
 Not covered:
 
 * Personal illness
 * Vehicle issues
 * Voluntary inactivity
-* Offline periods (no shift)
+* Offline periods (no active shift)
 * Network failures
 * Fraudulent behavior
 
 ---
 
-# ?? AI Architecture
+# AI Architecture
 
-| Module          | Model               | Purpose                |
-| --------------- | ------------------- | ---------------------- |
+| Module | Model | Purpose |
+| --- | --- | --- |
 | Risk Prediction | Logistic Regression | Disruption probability |
-| Premium Engine  | Rule + ML           | Dynamic pricing        |
-| Fraud Detection | Isolation Forest    | Activity validation    |
+| Premium Engine | Rule + ML | Dynamic pricing |
+| Fraud Detection | Isolation Forest | Activity validation |
 
 ---
 
-# ??? Tech Stack
+# Tech Stack
 
-* Frontend: React + Tailwind (mobile-first UI)
+* Frontend: React + Tailwind CSS (mobile-first UI)
 * Backend: Node.js + Express
 * Database: MongoDB
 * AI: Python (Scikit-learn)
@@ -301,14 +277,14 @@ Not covered:
 
 ---
 
-# ?? Prototype Capabilities
+# Prototype Capabilities
 
-? Registration flow  
-? Policy activation  
-? Dynamic premium calculation  
-? Automated triggers  
-? Zero-touch claims  
-? Payout simulation
+* Registration flow
+* Policy activation
+* Dynamic premium calculation
+* Automated triggers
+* Zero-touch claims
+* Payout simulation
 
 ---
 
@@ -332,9 +308,9 @@ npm run dev
 
 ---
 
-# ?? Conclusion
+# Conclusion
 
-InsureGig transforms parametric insurance into a **fully automated, intelligent income protection system** for gig workers.
+InsureGig transforms parametric insurance into a fully automated, intelligent income protection system for gig workers.
 
 It demonstrates:
 
