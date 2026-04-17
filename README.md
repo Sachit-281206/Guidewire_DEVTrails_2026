@@ -1,58 +1,49 @@
-﻿# InsureGig
+# InsureGig
 
-**AI-Powered Parametric Income Protection for Food Delivery Workers**  
-Guidewire DEVTrails 2026 - Phase 2 Submission
-
----
-
-# Phase 2: Automation and Protection
-
-**Theme: Protect Your Worker**
-
-InsureGig is a fully automated parametric micro-insurance prototype designed to protect gig delivery workers from income loss caused by real-world disruptions such as rain, heat, pollution, and operational failures.
-
-This Phase 2 implementation demonstrates a working end-to-end system with:
-
-* Automated disruption detection
-* AI-driven dynamic pricing
-* Zero-touch claim processing
-* Real-time payout simulation
+**AI-Powered Parametric Income Protection for Gig Workers**  
+Guidewire DEVTrails 2026 - Final Submission (Phase 3)
 
 ---
 
-# Problem Understanding
+# Overview
 
-India's food delivery ecosystem relies on millions of gig delivery partners operating through platforms such as Swiggy and Zomato. Their earnings are directly linked to completed deliveries and active outdoor working hours, making income highly vulnerable to sudden external disruptions.
+InsureGig is a fully automated parametric micro-insurance system designed to protect gig delivery workers from short-term income loss caused by environmental and social disruptions such as heavy rainfall, extreme heat, air pollution, flooding, and outages.
 
-Environmental events such as heavy rainfall, urban flooding, extreme heatwaves, and hazardous air pollution can reduce delivery productivity or temporarily halt operations. Similarly, civic disruptions such as unplanned curfews, local strikes, platform outages, or closure of key delivery zones can restrict access to pickup and drop locations.
-
-These short-term disruptions often result in immediate loss of earning opportunities within a working shift, affecting weekly financial stability.
-
-## Core Challenges
-
-| # | Challenge |
-| --- | --- |
-| 1 | Lack of simple and accessible short-term income protection mechanisms |
-| 2 | Traditional insurance products not aligned with flexible delivery-based earning patterns |
-| 3 | Manual claim processes unsuitable for micro-duration income disruptions |
-| 4 | Measurable environmental and social risks largely remain uninsured |
-
-**Parametric Justification:** Parametric insurance is suitable in this context because disruption events such as weather severity or mobility restrictions are externally measurable, enabling automated low-cost claim settlement without manual verification delays.
-
-**Objective:** Design an automated AI-enabled parametric protection platform that compensates delivery partners for verified disruption-induced income loss.
+Unlike traditional insurance, InsureGig eliminates manual claims and enables real-time income protection using AI, automation, and fraud-aware validation.
 
 ---
 
-# Solution Overview
+# Problem Statement
 
-InsureGig combines parametric insurance, AI, and automation to:
+Gig delivery workers earn based on active working hours. Their income is highly vulnerable to:
 
-* Detect disruptions automatically
-* Estimate income loss
-* Generate claims instantly
-* Provide compensation without manual intervention
+* Heavy rainfall and flooding
+* Extreme heat
+* Hazardous air quality
+* Platform outages and operational disruptions
 
-This platform is designed as an automated income protection layer for gig delivery workers, using measurable real-world triggers and explainable AI-based decisioning instead of paperwork-heavy traditional claims processing.
+These disruptions reduce working hours and delivery opportunities, leading to immediate income loss.
+
+### Core Challenges
+
+1. No short-term income protection mechanism
+2. Traditional insurance is not suited for flexible gig work patterns
+3. Manual claims are slow, expensive, and inefficient
+4. Measurable disruptions remain largely uninsured
+
+---
+
+# Solution
+
+InsureGig introduces an AI-powered parametric insurance system that:
+
+* Detects disruptions automatically
+* Predicts risk using machine learning
+* Calculates likely income loss
+* Generates claims instantly
+* Simulates instant payouts
+
+No paperwork. No manual claims. Fully automated.
 
 ---
 
@@ -60,82 +51,74 @@ This platform is designed as an automated income protection layer for gig delive
 
 ```text
 User registers -> activates policy -> starts shift
-        |
+        ↓
 System monitors environment continuously (mock API)
-        |
+        ↓
 Disruption detected automatically
-        |
+        ↓
+Fraud-aware validation and confidence scoring
+        ↓
 Claim generated (zero-touch)
-        |
+        ↓
 Payout calculated and credited
 ```
 
 ---
 
-# 1. Registration Process
+# 1. Registration and Worker Profile
 
-A structured onboarding flow captures:
+The onboarding flow captures:
 
-* Phone-based authentication (OTP)
-* Worker profile (name, city, platform)
-* Work details (daily income, full-time or part-time)
-* Identity verification (Aadhaar and PAN)
+* Phone/email-based authentication
+* Worker details (name, city, platform)
+* Income details (daily earnings, average work hours)
+* Identity data (Aadhaar, PAN)
 * UPI ID for payouts
-* Location permission for shift-based validation
-
-Output: Complete worker profile for risk and payout modeling.
+* Location permission for shift monitoring
 
 ---
 
 # 2. Insurance Policy Management
 
 * Weekly coverage model (7-day cycle)
-* User can activate policy at any time
-* Coverage remains valid only during active work sessions
+* Activated by the user
+* Valid only during active work sessions
+* Tied to live monitoring for automated protection
 
 ---
 
-# 3. Dynamic Premium Calculation (AI Integration)
+# 3. Dynamic Premium Calculation
 
-Premium is calculated using a risk-aware actuarial model.
+## ML Model
 
-## ML Integration
-
-* Logistic Regression predicts disruption probability as `risk_score`
+* Logistic Regression predicts disruption risk as `risk_score`
 
 ## Premium Formula
 
 ```text
-Premium = (Expected Loss * (1 + Margin)) + Transaction Cost
+Premium = (Expected Loss x (1 + Margin)) + Transaction Cost
 ```
 
 ## Expected Loss
 
 ```text
-Expected Loss =
-effective_risk * effective_hours * hourly_income
+Expected Loss = effective_risk x effective_hours x hourly_income
 ```
 
-## Key Factors
+## Features Used
 
-* ML risk score
-* City risk profile (hyper-local)
+* City risk
+* Environmental risk (rain, heat, AQI)
+* Worker income and work hours
 * Season factor
-* Worker income and exposure
 
-## Dynamic Pricing Behavior
+This enables hyper-local dynamic pricing.
 
-* Safer zones lead to lower premiums
-* High-risk zones lead to higher premiums
-* Seasonal risk adjustments are applied
-
-This demonstrates AI-driven dynamic pricing based on hyper-local risk.
+Note: the backend supports ML scoring through a service at `http://localhost:8000/predict`, and falls back to deterministic scoring if the ML API is unavailable.
 
 ---
 
 # 4. Automated Disruption Detection
-
-InsureGig implements 3 to 5 automated triggers using a structured mock API.
 
 ## Mock Environment API
 
@@ -156,149 +139,217 @@ GET /api/environment/:city
 }
 ```
 
+---
+
 ## Automated Trigger Engine
 
-Runs every 10 to 15 seconds:
+The backend monitoring engine runs every 10 to 15 seconds and:
 
 * Fetches environment data
-* Evaluates conditions
-* Detects disruptions
-
-## Implemented Triggers
-
-| Trigger | Condition |
-| --- | --- |
-| Heavy Rain | `rainfall > 0.7` |
-| Extreme Heat | `temperature > 0.85` |
-| High AQI | `aqi > 0.8` |
-| Flood (Derived) | `rainfall > 0.8` and high city risk |
-| Platform Outage | simulated event |
-
-Fully automated with no user interaction required.
+* Evaluates disruption conditions
+* Detects the highest-priority active trigger
+* Generates claims automatically for eligible workers
 
 ---
 
-# 5. Claims Management (Zero-Touch)
+## Trigger Types
 
-## Key Principle
+| Type | Condition |
+| --- | --- |
+| Rain | `rainfall > 0.7` |
+| Heat | `temperature > 0.85` |
+| AQI | `aqi > 0.8` |
+| Flood | `rainfall > 0.8` and high city risk |
+| Outage | simulated probability-based event |
+
+Fully automated. No user action required.
+
+---
+
+# 5. Advanced Fraud Detection (Phase 3)
+
+InsureGig implements a fraud-aware claim validation system to improve claim authenticity and payout confidence.
+
+## Signals Used
+
+* Confidence scoring from disruption-environment fit
+* Repeated claim detection
+* Abnormal claimed duration patterns
+* Review-state tracking in the admin dashboard
+
+## Confidence Score
 
 ```text
-User does NOT file claims
+Range: 0.6 - 1.0
 ```
 
-## Claim Flow
+* HIGH -> full payout
+* MEDIUM -> partial payout
+* LOW -> flagged for review
+
+## Example
+
+```text
+Strong rain signal + aligned trigger -> valid
+Weak signal + repeated claims + abnormal duration -> suspicious
+```
+
+---
+
+# 6. Zero-Touch Claims System
 
 ```text
 Trigger detected
--> Validate active shift and policy
+-> Validate active shift
+-> Validate active policy
+-> Apply confidence scoring
 -> Generate claim automatically
 -> Calculate payout
--> Store and display result
 ```
 
-## Validation
-
-* Active shift required
-* Active policy required
-* Cooldown applied to prevent duplicate claims
+The user does not file a claim manually.
 
 ---
 
-# 6. Automated Payout Calculation
+# 7. Instant Payout Simulation
 
 ## Formula
 
 ```text
-Payout = Hourly Income * Lost Hours * Confidence
+Payout = Hourly Income x Lost Hours x Confidence
 ```
 
-## Logic
+## Features
 
-* Lost hours are derived from disruption severity
-* Payout is adjusted using ML risk score
-* Confidence score is used for final payout determination
-
-## Constraints
-
-* Payout must be less than or equal to daily income
-* No payout without valid activity
+* Severity-based loss calculation
+* Confidence-adjusted payout
+* Risk-adjusted payout logic
+* Daily-income payout cap
+* Simulated instant credit flow
 
 ---
 
-# 7. Seamless Zero-Touch User Experience
+# 8. Intelligent Admin Dashboard (Phase 3)
 
-Users do not:
+A separate real-time control panel for insurers and operators.
 
-* File claims
-* Submit proofs
-* Click trigger buttons
+## Features
 
-## What the User Sees
+### System Overview
 
-* "Monitoring environment..."
-* "Heavy Rain Detected"
-* "Claim processed automatically"
-* "Rs 420 credited"
+* Total claims today
+* Total payout amount
+* Active policies
+* Active worker sessions
 
-This creates a fully automated and frictionless experience.
+### Claims Monitoring
 
----
+* User name
+* Disruption type
+* Payout amount
+* Confidence score
+* Claim status
+* Suspicious claim indicators
 
-# Coverage Exclusions
+### Fraud Detection Panel
 
-Not covered:
+* Low-confidence claims
+* Repeated claims by the same user
+* Abnormal claim-duration patterns
 
-* Personal illness
-* Vehicle issues
-* Voluntary inactivity
-* Offline periods (no active shift)
-* Network failures
-* Fraudulent behavior
+### Payout Tracking
+
+* Payout today
+* Payout this week
+* Average payout per claim
+* Recent payout activity
+
+### Risk and Predictive Insight
+
+* Next-week risk level: HIGH / MEDIUM / LOW
+* Key risk drivers
+* High-risk zones
+* Claim trend direction
+
+The admin dashboard runs as a separate app from the user app on its own Vite dev server.
 
 ---
 
 # AI Architecture
 
-| Module | Model | Purpose |
+| Module | Model / Logic | Purpose |
 | --- | --- | --- |
-| Risk Prediction | Logistic Regression | Disruption probability |
+| Risk Prediction | Logistic Regression | Premium calculation |
 | Premium Engine | Rule + ML | Dynamic pricing |
-| Fraud Detection | Isolation Forest | Activity validation |
+| Fraud Detection | Rule-based confidence and anomaly signals | Claim validation |
+| Loss Estimation | Rule-based severity + ML-informed factors | Payout calculation |
+
+---
+
+# Coverage Exclusions
+
+* Personal illness
+* Vehicle issues
+* Voluntary inactivity
+* Offline sessions
+* Network failures
+* Fraudulent behavior
 
 ---
 
 # Tech Stack
 
-* Frontend: React + Tailwind CSS (mobile-first UI)
+* Frontend: React + Tailwind CSS
+* Admin Dashboard: React (separate interface)
 * Backend: Node.js + Express
 * Database: MongoDB
-* AI: Python (Scikit-learn)
-* Data: Mock Environment API
+* AI: Python + Scikit-learn
+* Data: Mock environment API and synthetic risk data
 
 ---
 
 # Prototype Capabilities
 
-* Registration flow
+* Registration and onboarding
 * Policy activation
-* Dynamic premium calculation
+* AI-based premium calculation
 * Automated triggers
 * Zero-touch claims
-* Payout simulation
+* Fraud-aware validation
+* Instant payout simulation
+* Separate admin dashboard
+
+---
+
+# Demo Video
+
+Add your final demo video link here.
 
 ---
 
 # How to Run
 
-Backend:
+## Prerequisites
+
+* Node.js
+* MongoDB running locally on `mongodb://localhost:27017/insuregig`
+* Python environment for ML training or serving if needed
+
+## Backend
 
 ```bash
 cd backend
 npm install
-npm start
+npm run dev
 ```
 
-Frontend:
+The backend runs on:
+
+```text
+http://localhost:5000
+```
+
+## User App
 
 ```bash
 cd frontend
@@ -306,18 +357,57 @@ npm install
 npm run dev
 ```
 
+The user app usually runs on:
+
+```text
+http://localhost:5173
+```
+
+## Admin Dashboard
+
+```bash
+cd admin
+npm install
+npm run dev
+```
+
+The admin dashboard prefers:
+
+```text
+http://localhost:4174
+```
+
+If that port is already in use, Vite will automatically move it to the next free port.
+
+## Optional ML Service
+
+The backend already falls back safely if the ML API is unavailable, but if you want live ML scoring, run your prediction service on:
+
+```text
+http://localhost:8000/predict
+```
+
+You can also retrain the bundled model with:
+
+```bash
+python ml/train_model.py
+```
+
 ---
 
 # Conclusion
 
-InsureGig transforms parametric insurance into a fully automated, intelligent income protection system for gig workers.
+InsureGig transforms parametric insurance into a fully automated, intelligent income protection system tailored for gig workers.
 
 It demonstrates:
 
 * AI-driven pricing
 * Automated disruption detection
+* Fraud-aware validation
 * Zero-touch claims
-* Real-world system thinking
+* Real-time payout simulation
+* A separate insurer-facing admin control center
+* Scalable insurance system design
 
 ---
 

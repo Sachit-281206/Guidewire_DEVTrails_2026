@@ -1,0 +1,37 @@
+:root {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #d9e6f2;
+  background:
+    radial-gradient(circle at top left, rgba(37, 83, 159, 0.36), transparent 32%),
+    radial-gradient(circle at top right, rgba(11, 170, 131, 0.18), transparent 28%),
+    linear-gradient(180deg, #07111d, #0b1524 42%, #09111e);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}

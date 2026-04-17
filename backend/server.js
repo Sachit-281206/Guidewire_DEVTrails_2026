@@ -17,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/insuregig')
 app.use('/api/users',       require('./routes/users'));
 app.use('/api/policies',    require('./routes/policies'));
 app.use('/api/shifts',      require('./routes/shifts'));
+app.use('/api/admin',       require('./routes/admin'));
 app.use('/api/disruptions', require('./routes/disruptions'));
 app.use('/api',             require('./routes/disruptions'));
 app.use('/api/environment', require('./routes/environment'));
